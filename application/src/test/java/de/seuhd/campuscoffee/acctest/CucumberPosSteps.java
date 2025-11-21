@@ -93,6 +93,12 @@ public class CucumberPosSteps {
 
     // TODO: Add Given step for new scenario
 
+    @Given("the following POS exist:")
+    public void theFollowingPosExist(List<PosDto> posList) {
+        createdPosList = createPos(posList);
+        assertThat(createdPosList).size().isEqualTo(posList.size());
+    }
+
     // When -----------------------------------------------------------------------
 
     @When("I insert POS with the following elements")
@@ -103,6 +109,10 @@ public class CucumberPosSteps {
 
     // TODO: Add When step for new scenario
 
+    @When("I update the POS {string} with the description {string}")
+    public void iUpdateThePosWithTheDescription(String name, String newDescription) {
+        updatedPos = updatePosDescription(posService, name, newDescription);
+    }
     // Then -----------------------------------------------------------------------
 
     @Then("the POS list should contain the same elements in the same order")
@@ -114,4 +124,9 @@ public class CucumberPosSteps {
     }
 
     // TODO: Add Then step for new scenario
+    @Then("the POS {string} should have the description {string}")
+    public void thePosShouldHaveTheDescription(String name, String expectedDescription) {
+        PosDto pos = retrievePosByName(name);
+        assertThat(pos.getDescription()).isEqualTo(expectedDescription);
+    }
 }
