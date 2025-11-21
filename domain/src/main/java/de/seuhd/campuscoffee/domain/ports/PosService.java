@@ -89,3 +89,12 @@ public interface PosService {
      */
     @NonNull Pos importFromOsmNode(@NonNull Long nodeId, @NonNull CampusType campusType) throws OsmNodeNotFoundException, OsmNodeMissingFieldsException, DuplicatePosNameException;
 }
+
+/**
+ * Retrieves a specific POS by its name.
+ *
+ * @param name the name of the POS to retrieve; must not be null
+ * @return the POS entity with the specified name
+ * @throws PosNotFoundException if no POS exists with the given name
+ */
+@NonNull Pos getByName(@NonNull String name) throws PosNotFoundException;

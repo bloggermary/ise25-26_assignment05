@@ -151,3 +151,9 @@ public class PosServiceImpl implements PosService {
         }
     }
 }
+
+@Override
+public Pos getByName(@NonNull String name) throws PosNotFoundException {
+    return posDataService.findByName(name)
+            .orElseThrow(() -> new PosNotFoundException("POS with name " + name + " not found"));
+}
